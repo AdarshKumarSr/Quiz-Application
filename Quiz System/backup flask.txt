@@ -1,0 +1,114 @@
+from flask import Flask, render_template, jsonify, request
+
+app = Flask(__name__)
+
+# Sample questions categorized by difficulty
+questions = [
+    {
+        "question": "What is a stack?",
+        "answers": [
+            {"Text": "A linear data structure that follows FIFO (First In First Out)", "correct": False},
+            {"Text": "A collection of elements organized in a hierarchical structure", "correct": False},
+            {"Text": "A linear data structure that follows LIFO (Last In First Out)", "correct": True},
+            {"Text": "A type of tree structure used to store hierarchical data", "correct": False}
+        ]
+    },
+    {
+        "question": "Which of the following operations is not applicable to a stack?",
+        "answers": [
+            {"Text": "Push", "correct": False},
+            {"Text": "Pop", "correct": False},
+            {"Text": "Peek", "correct": False},
+            {"Text": "Random Access", "correct": True}
+        ]
+    },
+    {
+        "question": "Which of the following is an application of stacks?",
+        "answers": [
+            {"Text": "Recursion", "correct": True},
+            {"Text": "Breadth-First Search", "correct": False},
+            {"Text": "Dijkstra's Algorithm", "correct": False},
+            {"Text": "Merge Sort", "correct": False}
+        ]
+    },
+    {
+        "question": "What is the result of the following sequence of operations on an empty stack?\nPush(1), Push(2), Pop(), Push(3), Pop(), Pop()",
+        "answers": [
+            {"Text": "3", "correct": False},
+            {"Text": "2", "correct": False},
+            {"Text": "1", "correct": False},
+            {"Text": "Stack is empty", "correct": True}
+        ]
+    },
+    {
+        "question": "What is the time complexity of inserting an element in a stack implemented using an array, when the array is full?",
+        "answers": [
+            {"Text": "O(1)", "correct": False},
+            {"Text": "O(n)", "correct": True},
+            {"Text": "O(log n)", "correct": False},
+            {"Text": "O(n^2)", "correct": False}
+        ]
+    },
+    
+    {
+        "question": "What is the main difference between a stack and a queue?",
+        "answers": [
+            {"Text": "Stacks follow LIFO (Last In First Out) while queues follow FIFO (First In First Out)", "correct": True},
+            {"Text": "Stacks and queues follow the same order of operations", "correct": False},
+            {"Text": "Queues are more efficient than stacks in all cases", "correct": False},
+            {"Text": "Stacks can only hold elements of one type", "correct": False}
+        ]
+    },
+    {
+        "question": "Which operation is typically used to add an element to a stack?",
+        "answers": [
+            {"Text": "Enqueue", "correct": False},
+            {"Text": "Push", "correct": True},
+            {"Text": "Insert", "correct": False},
+            {"Text": "Append", "correct": False}
+        ]
+    },
+    {
+        "question": "In a stack, which operation removes the most recently added element?",
+        "answers": [
+            {"Text": "Peek", "correct": False},
+            {"Text": "Pop", "correct": True},
+            {"Text": "Push", "correct": False},
+            {"Text": "Add", "correct": False}
+        ]
+    },
+    {
+        "question": "Which data structure would be best suited for undo functionality in applications?",
+        "answers": [
+            {"Text": "Queue", "correct": False},
+            {"Text": "Stack", "correct": True},
+            {"Text": "Array", "correct": False},
+            {"Text": "Linked List", "correct": False}
+        ]
+    },
+    {
+        "question": "What is the space complexity of a stack implemented using a dynamic array?",
+        "answers": [
+            {"Text": "O(1)", "correct": False},
+            {"Text": "O(n)", "correct": True},
+            {"Text": "O(log n)", "correct": False},
+            {"Text": "O(n^2)", "correct": False}
+        ]
+    }
+
+
+]
+
+# Route to serve the Quiz HTML file
+@app.route('/')
+def quiz():
+    return render_template('Quiz.html')
+
+# API endpoint to send the questions to the front-end
+@app.route('/questions', methods=['GET'])
+def get_questions():
+    return jsonify(questions)
+
+# Start the Flask application
+if __name__ == '__main__':
+    app.run(debug=True)
