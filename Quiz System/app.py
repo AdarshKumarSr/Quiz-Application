@@ -17,6 +17,9 @@ class QuizAlgorithm:
         self.user_level = 'beginner'
         self.difficulty_levels = ['beginner', 'intermediate', 'advanced']
 
+
+    # Add a question to the quiz database
+    # question: Question object
     def add_question(self, question):
         self.questions.append(question)
 
